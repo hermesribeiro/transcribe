@@ -2,17 +2,13 @@ import argparse
 import os
 import sys
 
-from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv()
 client = OpenAI()
 
 
 def cli():
-    parser = argparse.ArgumentParser(
-        description="Transcribe an audio file using OpenAI's Whisper."
-    )
+    parser = argparse.ArgumentParser(description="Transcribe an audio file using OpenAI's Whisper.")
     parser.add_argument("audio_file", help="Path to the audio file to transcribe.")
     args = parser.parse_args()
 
@@ -24,9 +20,7 @@ def cli():
     # Perform transcription
     print(f"Transcribing '{audio_file_path}'...")
     audio_file = open(audio_file_path, "rb")
-    transcription = client.audio.transcriptions.create(
-        model="whisper-1", file=audio_file
-    )
+    transcription = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
     transcript = transcription.text
 
     # Create an output text file with the same name (but .txt extension)
